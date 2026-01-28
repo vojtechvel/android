@@ -79,38 +79,28 @@ Oblast, kde emulátor nejčastěji "lže", je rychlost a správa vláken.
 Ukázka toho, jak v moderním Androidu vyřešit stahování dat bez zamrznutí aplikace (ANR). Využíváme **Coroutines**, které kód zpřehledňují.
 
 ```kotlin
-// Funkce v aktivitě (UI vrstva)
-fun stahniDataTlacitko() {
-    // 1. Jsme na Hlavním vlákně (Main Thread)
-    // Můžeme bezpečně měnit UI
-    progressBar.visibility = View.VISIBLE
-    infoText.text = "Stahuji data..."
-
-    // Spustíme korutinu v rámci životního cyklu aktivity
+fun stahniData() {
+    
+    // 1. Start: Uživatel klikl na tlačítko.
+    // Jsme na hlavním vlákně (UI), takže můžeme měnit texty.
+    infoText.text = "Čekám na data..."
+    
+    // Spustíme asynchronní akci (korutinu)
     lifecycleScope.launch {
         
-        // 2. Tady se "přepneme" na pozadí
-        // Voláme funkci označenou jako 'suspend'
-        val vysledek = ziskejDataZeServeru() 
+        // 2. Přepnutí na pozadí (IO vlákno)
+        // Tady říkáme: "Jdi pryč z hlavního vlákna a spočítej to na pozadí."
+        val stazenaZprava = withContext(Dispatchers.IO) {
+            
+            // Tady simulujeme pomalý internet (čekáme 3 sekundy)
+            // Aplikace ale NEZAMRZNE, protože jsme na pozadí!
+            delay(3000) 
+            
+        }
 
-        // 3. Jakmile funkce skončí, jsme automaticky zpět na Hlavním vlákně
-        // Můžeme zobrazit výsledek
-        progressBar.visibility = View.GONE
-        infoText.text = "Hotovo: $vysledek"
-    }
-}
-
-// Funkce simulující těžkou práci (např. síť nebo databáze)
-// Klíčové slovo 'suspend' říká, že tato funkce umí "pozastavit" korutinu
-suspend fun ziskejDataZeServeru(): String {
-    // withContext(Dispatchers.IO) explicitně přesune práci na vlákna optimalizovaná pro Input/Output
-    return withContext(Dispatchers.IO) {
-        
-        // Simulace práce (2 sekundy čekání)
-        // Na mobilu by tady probíhalo reálné stahování
-        Thread.sleep(2000) 
-        
-        // Vracíme výsledek
-        "Uživatelská data stažena!"
+        // 3. Návrat zpět
+        // Jakmile blok nahoře skončí, automaticky jsme zpět na hlavním vlákně.
+        // Můžeme bezpečně vypsat výsledek.
+        infoText.text = "Hotovo: $stazenaZprava"
     }
 }
