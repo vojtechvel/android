@@ -63,15 +63,15 @@ Oblast, kde emulátor nejčastěji "lže", je rychlost a správa vláken.
 ## Kdy co použít?
 
 ### Použij Emulátor, když:
-* Začínáš s vývojem UI a layoutů.
-* Potřebuješ otestovat různé velikosti displejů (tablet vs. telefon).
-* Chceš zkusit různé verze Androidu (API 24 vs API 34), které fyzicky nemáš.
+* Začínáme s vývojem UI a layoutů.
+* Potřebujeme otestovat různé velikosti displejů (tablet vs. telefon).
+* Chceme zkusit různé verze Androidu (API 24 vs API 34), které fyzicky nemáš.
 
-### Použij Reálné zařízení, když:
-* Ladíš výkon a plynulost animací.
-* Pracuješ se senzory (poloha, kamera, mikrofon).
-* Testuješ spotřebu baterie.
-* Jdeš do produkce (vždy otestuj na skutečném telefonu!).
+### Použijeme Reálné zařízení, když:
+* Ladíme výkon a plynulost animací.
+* Pracujeme se senzory (poloha, kamera, mikrofon).
+* Testujeme spotřebu baterie.
+* Jdeme do produkce (vždy otestujme na skutečném telefonu!).
 
 ---
 ## Ukázka kódu: Moderní Vlákna (Kotlin Coroutines)
