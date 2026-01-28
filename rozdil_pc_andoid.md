@@ -76,7 +76,7 @@ Oblast, kde emulátor nejčastěji "lže", je rychlost a správa vláken.
 ---
 ## Ukázka kódu: Moderní Vlákna (Kotlin Coroutines)
 
-Ukázka toho, jak v moderním Androidu vyřešit stahování dat bez zamrznutí aplikace (ANR). Využíváme **Coroutines**, které kód zpřehledňují – čte se to shora dolů, i když to běží na různých vláknech.
+Ukázka toho, jak v moderním Androidu vyřešit stahování dat bez zamrznutí aplikace (ANR). Využíváme **Coroutines**, které kód zpřehledňují.
 
 ```kotlin
 // Funkce v aktivitě (UI vrstva)
